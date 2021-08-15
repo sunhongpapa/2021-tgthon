@@ -229,10 +229,41 @@ void serverStream() {
   }
 }
 
+String webpage1 = "<!DOCTYPE html> <html lang=''> <head> <meta charset='UTF-8'>  <title>아두이노</title>  </head> <html>  <body>    <h1>티지톤 아두이노 테스트</h1>    <p>안녕안녕</p> <button>클릭하세용</button>  </body> </html>";
+
+
 void handleNotFound() {
-//  String message = "Server is running!\n\n";
-//  server.send(200, "text/plain", message);
+  WiFiClient client = server.client();
   
+  String message = "Server is running!\n\n";
+//  server.send(200, "text/plain", message);
+//  server.send(200, "text/html", webpage1);
+  client.print(
+  "HTTP/1.1 200 OK\r\n"
+  "Content-Type: text/html\r\n"
+  "Connection: close\r\n"
+  "Refresh: 20\r\n"
+  "\r\n");
+  client.println("<!DOCTYPE HTML>");
+  client.println("<meta charset='UTF-8'");
+  client.println("<html>");
+  client.println("<head>");
+  client.println("<script>");
+  client.println("function showTime() {");
+  client.println("var currentDate = new Date();");
+  client.println("var divClock = document.getElementById('divClock');");
+  client.println("var msg = '현재 시간: ';");
+  client.println("msg += currentDate.getHours() + '시 ' +currentDate.getMinutes() + '분 ' + currentDate.getSeconds() + '초 ';");
+  client.println("divClock.innerText = msg; }");
+  client.println("</script>");
+  client.println("</head>");
+  client.println("<body onload='showTime()'>");
+  client.println("<h1>아두이노 사진웹 </h1>");
+  client.println("<img id ='capturePic' src='http://192.168.4.1/capture?t=0.05677014234584332'>");
+  client.println("<div id='divClock' class = 'clock'>");
+  client.println("</div>");
+  client.println("</body>");
+  client.println("</html>");
   
 
   if (server.hasArg("ql")) {

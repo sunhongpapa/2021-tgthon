@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <title>아두이노</title>
+    <script type = "text/javascript">
+      function button1() {
+        alert("버튼을 눌렀습니다.")
+      }
+      function showTime() {
+        var currentDate = new Date();
+        var divClock = document.getElementById('divClock');
+        var msg = '현재시간 :';
+        msg+= currentDate.getHours() + '시 ';
+        divClock.innerText =msg;
+      }
+    </script>
+  </head>
+  
+  <body  onload='showTime()'>
+    <h1>테스트파일</h1>
+    <div id = 'divClock' class = 'clock'></div>
+    
+  </body>
+  
+</html>
